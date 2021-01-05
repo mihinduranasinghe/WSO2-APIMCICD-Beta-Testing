@@ -27,3 +27,12 @@ jobs:
           passwordTargettedTenant: ${{secrets.PASSWORD}}
           APIProjectName: "SampleStore"
           APIVersion: "2.0.0"
+
+      - name: petstore project v1 deploy - Dev Tenant
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v1.0.0
+        with:
+          usernameTargettedTenant: "mihindu@wso2.com@production"
+          passwordTargettedTenant: ${{secrets.PASSWORD}}
+          APIProjectName: "SampleStore"
+          APIVersion: "1.0.0"
