@@ -1,0 +1,20 @@
+name: APIM Projects CICD
+on:
+  push:
+    branches: [main, prod]
+
+jobs:
+  testing-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout files to vm
+        uses: actions/checkout@v2.3.4
+
+      - name: petstore project v1 deploy - Dev Tenant
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: mihinduranasinghe/WSO2-APIManager-Cloud-CICD-Beta@v1.0.0
+        with:
+          usernameTargettedTenant: "mihindu@wso2.com@development"
+          passwordTargettedTenant: ${{secrets.PASSWORD}}
+          APIProjectName: "SampleStore"
+          APIVersion: "1.0.0"
